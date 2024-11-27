@@ -17,6 +17,7 @@ use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\PostResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostResource\RelationManagers;
+use Illuminate\Support\Str;
 
 class PostResource extends Resource
 {
@@ -28,10 +29,26 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('title')->required(),
-                Textarea::make('excerpt'),
-                RichEditor::make('content')->required(),
-                DateTimePicker::make('published_at'),
+                TextInput::make('title')
+                    ->label('Title')
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
+                TextInput::make('slug')
+                    ->label('Slug')
+                    ->required()
+                    ->unique(Post::class, 'slug')
+                    ->maxLength(255),
+                Textarea::make('excerpt')
+                    ->label('Excerpt')
+                    ->required()
+                    ->maxLength(500),
+                RichEditor::make('content')
+                    ->label('Content')
+                    ->required(),
+                DateTimePicker::make('published_at')
+                    ->label('Published At')
+                    ->nullable(),
             ]);
     }
 
@@ -41,7 +58,7 @@ class PostResource extends Resource
             ->columns([
                 TextColumn::make('title')->searchable()->sortable(),
                 TextColumn::make('excerpt')->limit(50),
-                TextColumn::make('published_at'),
+                TextColumn::make('published_at')->sortable(),
             ])
             ->filters([
                 //
