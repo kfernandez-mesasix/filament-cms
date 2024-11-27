@@ -62,6 +62,7 @@ class PostResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')->searchable()->sortable(),
+                TextColumn::make('slug'),
                 TextColumn::make('excerpt')->limit(50),
                 TextColumn::make('published_at')->sortable(),
             ])
