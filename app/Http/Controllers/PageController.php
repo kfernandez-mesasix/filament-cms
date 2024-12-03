@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -15,12 +16,10 @@ class PageController extends Controller
 
     public function homepage()
     {
-        // Fetch the homepage slug from the settings
-        $homepageSlug = config('app.homepage_slug', 'home'); // Default to 'home' if no value is set
+        $homepageSlug = Setting::get('homepage_slug') ?? 'home';
 
-        // Find the page with that slug
         $page = Page::where('slug', $homepageSlug)->firstOrFail();
 
-        return view('pages.show', compact('page'));
+        return view('pages.home', compact('page'));
     }
 }

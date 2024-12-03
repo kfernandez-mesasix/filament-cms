@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-
-<body>
-    <h1>Welcome to the Homepage</h1>
-    <p>No homepage is set yet.</p>
-</body>
-
-</html>
+@section('content')
+<article>
+    <h1>{{ $page->title }}</h1>
+    <p><small>Published on {{ $page->created_at->format('F j, Y') }}</small></p>
+    <div>
+        {!! nl2br(e($page->content)) !!}
+    </div>
+</article>
+@endsection
