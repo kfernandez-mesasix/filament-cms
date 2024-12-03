@@ -13,6 +13,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\PostResource\Pages;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -71,7 +72,7 @@ class PostResource extends Resource
                 TextColumn::make('title')->searchable()->sortable(),
                 TextColumn::make('slug')
                     ->formatStateUsing(fn ($state) => url('posts/' . $state))
-                    ->url(fn ($record) => url('posts/' . $record->slug), true) // Opens in a new tab
+                    ->url(fn ($record) => url('posts/' . $record->slug), true)
                     ->openUrlInNewTab(),
                 TextColumn::make('excerpt')->limit(50),
                 TextColumn::make('published_at')->sortable(),

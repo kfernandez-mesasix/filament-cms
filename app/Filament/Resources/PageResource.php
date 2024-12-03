@@ -4,22 +4,18 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use App\Models\Page;
-use App\Models\Post;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\MarkdownEditor;
-use App\Filament\Resources\PageResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\PageResource\RelationManagers;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\DateTimePicker;
+use App\Filament\Resources\PageResource\Pages;
 
 class PageResource extends Resource
 {
@@ -38,11 +34,13 @@ class PageResource extends Resource
                 ->maxLength(255)
                 ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
             TextInput::make('slug')
-                ->disabled()
                 ->dehydrated()
                 ->required()
                 ->maxLength(255)
-                ->unique(Post::class, 'slug', ignoreRecord: true),
+                ->unique(Page::class, 'slug', ignoreRecord: true)
+                ->afterStateUpdated(function ($state, callable $set) {
+                    $set('slug', Str::slug($state));
+                }),
             RichEditor::make('content')
                 ->label('Content')
                 ->columnSpan('full')
@@ -63,6 +61,10 @@ class PageResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')->searchable()->sortable(),
+                TextColumn::make('slug')
+                    ->formatStateUsing(fn ($state) => url('posts/' . $state))
+                    ->url(fn ($record) => url('posts/' . $record->slug), true)
+                    ->openUrlInNewTab(),
                 TextColumn::make('slug'),
                 TextColumn::make('excerpt')->limit(50),
                 TextColumn::make('published_at')->sortable(),
