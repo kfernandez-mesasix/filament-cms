@@ -7,11 +7,14 @@ use App\Models\Post;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\DateTimePicker;
@@ -19,6 +22,8 @@ use Filament\Forms\Components\MarkdownEditor;
 use App\Filament\Resources\PostResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PostResource\RelationManagers;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
 class PostResource extends Resource
 {
@@ -37,12 +42,11 @@ class PostResource extends Resource
                     ->maxLength(255)
                     ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
                 TextInput::make('slug')
-                    ->disabled()
                     ->dehydrated()
                     ->required()
                     ->maxLength(255)
                     ->unique(Post::class, 'slug', ignoreRecord: true),
-                MarkdownEditor::make('content')
+                RichEditor::make('content')
                     ->label('Content')
                     ->columnSpan('full')
                     ->required(),
@@ -54,6 +58,14 @@ class PostResource extends Resource
                 DateTimePicker::make('published_at')
                     ->label('Published At')
                     ->nullable(),
+                SpatieMediaLibraryFileUpload::make('image')
+                    ::make('image')
+                    ->label('Feature Image')
+                    ->image()
+                    ->collection('images')
+                    ->directory('posts')
+                    ->disk('public')
+                    ->maxSize(2048),
             ]);
     }
 
@@ -94,4 +106,5 @@ class PostResource extends Resource
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
+
 }

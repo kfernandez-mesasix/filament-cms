@@ -118,11 +118,11 @@ The Filament Admin Panel is available at /admin. Log in using the admin credenti
 
 ### Media Management
 
-Install and configure Spatie Media Library for file uploads and organization:
+Install and configure [Filament Spatie Media Library](https://filamentphp.com/plugins/filament-spatie-media-library) for file uploads and organization:
 
 ```bash
-composer require spatie/laravel-medialibrary
-php artisan vendor:publish --tag="media-library-migrations"
+composer require filament/spatie-laravel-media-library-plugin:"^3.2" -W
+php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="medialibrary-migrations"
 php artisan migrate
 ```
 

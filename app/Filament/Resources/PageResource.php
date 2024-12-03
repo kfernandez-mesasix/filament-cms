@@ -19,6 +19,7 @@ use Filament\Forms\Components\MarkdownEditor;
 use App\Filament\Resources\PageResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\PageResource\RelationManagers;
+use Filament\Forms\Components\RichEditor;
 
 class PageResource extends Resource
 {
@@ -42,7 +43,7 @@ class PageResource extends Resource
                 ->required()
                 ->maxLength(255)
                 ->unique(Post::class, 'slug', ignoreRecord: true),
-            MarkdownEditor::make('content')
+            RichEditor::make('content')
                 ->label('Content')
                 ->columnSpan('full')
                 ->required(),

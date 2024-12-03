@@ -3,10 +3,10 @@
 @section('content')
 <article>
     <h1>{{ $post->title }}</h1>
-    <p><small>Published on {{ $post->created_at->format('F j, Y') }}</small></p>
-    <div>
-        {!! nl2br(e($post->content)) !!}
-    </div>
+    @if ($post->getFirstMediaUrl('images'))
+    <img src="{{ $post->getFirstMediaUrl('images') }}" alt="{{ $post->title }}" style="max-width: 100%; height: auto;">
+    @endif
+    <div>{!! $post->content !!}</div>
 </article>
 <p><a href="{{ url('/') }}">Back to Blog</a></p>
 @endsection
