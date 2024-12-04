@@ -9,7 +9,9 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use RalphJSmit\Filament\SEO\SEO;
 use Illuminate\Support\Facades\Auth;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -29,40 +31,46 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('title')
-                    ->label('Title')
-                    ->required()
-                    ->live(onBlur: true)
-                    ->maxLength(255)
-                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
-                TextInput::make('slug')
-                    ->dehydrated()
-                    ->required()
-                    ->maxLength(255)
-                    ->unique(Post::class, 'slug', ignoreRecord: true)
-                    ->afterStateUpdated(function ($state, callable $set) {
-                        $set('slug', Str::slug($state));
-                    }),
-                RichEditor::make('content')
-                    ->label('Content')
-                    ->columnSpan('full')
-                    ->required(),
-                Textarea::make('excerpt')
-                    ->label('Excerpt')
-                    ->columnSpan('full')
-                    ->required()
-                    ->maxLength(500),
-                DateTimePicker::make('published_at')
-                    ->label('Published At')
-                    ->nullable(),
-                SpatieMediaLibraryFileUpload::make('image')
-                    ::make('image')
-                    ->label('Feature Image')
-                    ->image()
-                    ->collection('images')
-                    ->directory('posts')
-                    ->disk('public')
-                    ->maxSize(2048),
+                Fieldset::make('Content')
+                ->schema([
+                    TextInput::make('title')
+                        ->label('Title')
+                        ->required()
+                        ->live(onBlur: true)
+                        ->maxLength(255)
+                        ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
+                    TextInput::make('slug')
+                        ->dehydrated()
+                        ->required()
+                        ->maxLength(255)
+                        ->unique(Post::class, 'slug', ignoreRecord: true)
+                        ->afterStateUpdated(function ($state, callable $set) {
+                            $set('slug', Str::slug($state));
+                        }),
+                    RichEditor::make('content')
+                        ->label('Content')
+                        ->columnSpan('full')
+                        ->required(),
+                    Textarea::make('excerpt')
+                        ->label('Excerpt')
+                        ->columnSpan('full')
+                        ->required()
+                        ->maxLength(500),
+                    DateTimePicker::make('published_at')
+                        ->label('Published At')
+                        ->nullable(),
+                    SpatieMediaLibraryFileUpload::make('image')
+                        ::make('image')
+                        ->label('Feature Image')
+                        ->image()
+                        ->collection('images')
+                        ->directory('posts')
+                        ->disk('public')
+                ]),
+                Fieldset::make('Meta')
+                ->schema([
+                    SEO::make(),
+                ]),
             ]);
     }
 

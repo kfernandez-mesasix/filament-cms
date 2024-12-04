@@ -142,11 +142,12 @@ php artisan migrate
 
 ### SEO Metadata
 
-You can add SEO fields to any resource. For advanced SEO tools, install `artesaos/seotools`:
+You can add SEO fields to any resource. For advanced SEO tools, install `ralphjsmit/laravel-seo`:
 
 ```bash
-composer require artesaos/seotools
-php artisan vendor:publish --provider="Artesaos\SEOTools\Providers\SEOToolsServiceProvider"
+composer require ralphjsmit/laravel-seo
+php artisan vendor:publish --tag="seo-migrations"
+php artisan vendor:publish --tag="seo-config"
 ```
 
 ---

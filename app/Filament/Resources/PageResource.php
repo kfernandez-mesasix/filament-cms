@@ -9,8 +9,11 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use RalphJSmit\Filament\SEO\SEO;
+use Filament\Forms\Components\Tabs;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -28,32 +31,39 @@ class PageResource extends Resource
     {
         return $form
         ->schema([
-            TextInput::make('title')
+            Fieldset::make('Content')
+            ->schema([
+                TextInput::make('title')
                 ->label('Title')
                 ->required()
                 ->live(onBlur: true)
                 ->maxLength(255)
                 ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
-            TextInput::make('slug')
-                ->dehydrated()
-                ->required()
-                ->maxLength(255)
-                ->unique(Page::class, 'slug', ignoreRecord: true)
-                ->afterStateUpdated(function ($state, callable $set) {
-                    $set('slug', Str::slug($state));
-                }),
-            RichEditor::make('content')
-                ->label('Content')
-                ->columnSpan('full')
-                ->required(),
-            Textarea::make('excerpt')
-                ->label('Excerpt')
-                ->columnSpan('full')
-                ->required()
-                ->maxLength(500),
-            DateTimePicker::make('published_at')
-                ->label('Published At')
-                ->nullable(),
+                TextInput::make('slug')
+                    ->dehydrated()
+                    ->required()
+                    ->maxLength(255)
+                    ->unique(Page::class, 'slug', ignoreRecord: true)
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        $set('slug', Str::slug($state));
+                    }),
+                RichEditor::make('content')
+                    ->label('Content')
+                    ->columnSpan('full')
+                    ->required(),
+                Textarea::make('excerpt')
+                    ->label('Excerpt')
+                    ->columnSpan('full')
+                    ->required()
+                    ->maxLength(500),
+                DateTimePicker::make('published_at')
+                    ->label('Published At')
+                    ->nullable(),
+            ]),
+            Fieldset::make('Meta')
+            ->schema([
+                SEO::make(),
+            ]),
         ]);
     }
 
