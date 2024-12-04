@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -99,5 +100,30 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()?->can('manage users') ?? false;
+    }
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()?->can('manage users') ?? false;
+    }
+
+    public static function canEdit($user): bool
+    {
+        return Auth::user()?->can('manage users') ?? false;
+    }
+
+    public static function canDelete($user): bool
+    {
+        return Auth::user()?->can('manage users') ?? false;
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Auth::user()?->can('manage users') ?? false;
     }
 }

@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
@@ -96,5 +97,30 @@ class PageResource extends Resource
             'create' => Pages\CreatePage::route('/create'),
             'edit' => Pages\EditPage::route('/{record}/edit'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()?->can('manage pages') ?? false;
+    }
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()?->can('manage pages') ?? false;
+    }
+
+    public static function canEdit($record): bool
+    {
+        return Auth::user()?->can('manage pages') ?? false;
+    }
+
+    public static function canDelete($record): bool
+    {
+        return Auth::user()?->can('manage pages') ?? false;
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Auth::user()?->can('manage pages') ?? false;
     }
 }

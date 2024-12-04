@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -104,5 +105,30 @@ class PostResource extends Resource
             'create' => Pages\CreatePost::route('/create'),
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()?->can('manage posts') ?? false;
+    }
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()?->can('manage posts') ?? false;
+    }
+
+    public static function canEdit($record): bool
+    {
+        return Auth::user()?->can('manage posts') ?? false;
+    }
+
+    public static function canDelete($record): bool
+    {
+        return Auth::user()?->can('manage posts') ?? false;
+    }
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return Auth::user()?->can('manage posts') ?? false;
     }
 }
