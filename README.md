@@ -114,44 +114,6 @@ The Filament Admin Panel is available at /admin. Log in using the admin credenti
 
 ---
 
-## Optional Features
-
-### Media Management
-
-Install and configure [Filament Spatie Media Library](https://filamentphp.com/plugins/filament-spatie-media-library) for file uploads and organization:
-
-```bash
-composer require filament/spatie-laravel-media-library-plugin:"^3.2" -W
-php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="medialibrary-migrations"
-php artisan migrate
-```
-
----
-
-### Role and Permission Management
-
-Install Spatie's Permission package for user roles and permissions:
-
-```bash
-composer require spatie/laravel-permission
-php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
-php artisan migrate
-```
-
----
-
-### SEO Metadata
-
-You can add SEO fields to any resource. For advanced SEO tools, install `ralphjsmit/laravel-seo`:
-
-```bash
-composer require ralphjsmit/laravel-seo
-php artisan vendor:publish --tag="seo-migrations"
-php artisan vendor:publish --tag="seo-config"
-```
-
----
-
 ### Build Assets for Production
 
 ```bash
