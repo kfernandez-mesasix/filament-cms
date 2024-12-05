@@ -12,7 +12,8 @@
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
         "ralphjsmit/laravel-filament-seo": "^1.4",
-        "spatie/laravel-permission": "^6.10"
+        "spatie/laravel-permission": "^6.10",
+        "z3d0x/filament-fabricator": "^2.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
