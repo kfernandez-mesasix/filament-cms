@@ -16,10 +16,9 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\PostResource\Pages;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Awcodes\Curator\Components\Forms\CuratorPicker;
 
 class PostResource extends Resource
 {
@@ -59,13 +58,8 @@ class PostResource extends Resource
                     DateTimePicker::make('published_at')
                         ->label('Published At')
                         ->nullable(),
-                    SpatieMediaLibraryFileUpload::make('image')
-                        ::make('image')
-                        ->label('Feature Image')
-                        ->image()
-                        ->collection('images')
-                        ->directory('posts')
-                        ->disk('public')
+                    CuratorPicker::make('featured_image_id')
+                        ->relationship('featuredImage', 'id'),
                 ]),
                 Fieldset::make('Meta')
                 ->schema([

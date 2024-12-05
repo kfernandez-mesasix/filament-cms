@@ -20,8 +20,9 @@ class RoleAndPermissionSeeder extends Seeder
         $manageUsersPermission = Permission::create(['name' => 'manage users']);
         $managePostsPermission = Permission::create(['name' => 'manage posts']);
         $managePagesPermission = Permission::create(['name' => 'manage pages']);
+        $manageMediaPermission = Permission::create(['name' => 'manage media']);
 
-        $adminRole->givePermissionTo([$manageUsersPermission, $managePostsPermission, $managePagesPermission]);
+        $adminRole->givePermissionTo([$manageUsersPermission, $managePostsPermission, $managePagesPermission, $manageMediaPermission]);
         $editorRole->givePermissionTo([$managePostsPermission, $managePagesPermission]);
 
         $user = \App\Models\User::first();

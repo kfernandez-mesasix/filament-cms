@@ -7,12 +7,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "awcodes/filament-curator": "^3.6",
         "filament/filament": "^3.2",
-        "filament/spatie-laravel-media-library-plugin": "^3.2",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
         "ralphjsmit/laravel-filament-seo": "^1.4",
-        "spatie/laravel-medialibrary": "^11.10",
         "spatie/laravel-permission": "^6.10"
     },
     "require-dev": {

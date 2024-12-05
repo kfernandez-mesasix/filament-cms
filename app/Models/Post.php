@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
-use Spatie\MediaLibrary\HasMedia;
+use Awcodes\Curator\Models\Media;
 use Illuminate\Database\Eloquent\Model;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
-use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Post extends Model implements HasMedia
+class Post extends Model
 {
-    use HasSEO, InteractsWithMedia;
+    use HasSEO;
+
+    public function featuredImage(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'featured_image_id', 'id');
+    }
 }
