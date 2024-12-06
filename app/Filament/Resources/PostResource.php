@@ -21,13 +21,14 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\DateTimePicker;
 use App\Filament\Resources\PostResource\Pages;
+use Filament\Forms\Components\SpatieTagsInput;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
 
 class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-document-minus';
 
     protected static ?string $navigationGroup = 'Blog';
 
@@ -71,9 +72,15 @@ class PostResource extends Resource
                     DateTimePicker::make('published_at')
                         ->label('Published At')
                         ->nullable(),
-                    CuratorPicker::make('featured_image_id')
-                        ->relationship('featuredImage', 'id'),
+                    SpatieTagsInput::make('tags')
+                        ->nullable(),
                 ]),
+                Section::make('Image')
+                ->schema([
+                    CuratorPicker::make('featured_image_id')
+                    ->hiddenLabel()
+                    ->relationship('featuredImage', 'id'),
+                ])->collapsible(),
                 Section::make('Meta')
                 ->schema([
                     SEO::make(),

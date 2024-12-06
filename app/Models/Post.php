@@ -6,10 +6,12 @@ use Awcodes\Curator\Models\Media;
 use Illuminate\Database\Eloquent\Model;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Tags\HasTags;
 
 class Post extends Model
 {
     use HasSEO;
+    use HasTags;
 
     public function featuredImage(): BelongsTo
     {
