@@ -12,7 +12,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\TextEntry;
-use App\Filament\Resources\Blog\CategoryResource\Pages\ManageCategories;
+use App\Filament\Resources\CategoryResource\Pages\ManageCategories;
 
 class CategoryResource extends Resource
 {

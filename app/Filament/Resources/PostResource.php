@@ -60,13 +60,17 @@ class PostResource extends Resource
                         ->label('Excerpt')
                         ->columnSpan('full')
                         ->maxLength(500),
-                    DateTimePicker::make('published_at')
-                        ->label('Published At')
-                        ->nullable(),
+                   Select::make('author_id')
+                        ->relationship('author', 'name')
+                        ->searchable()
+                        ->required(),
                     Select::make('category_id')
                         ->relationship('category', 'name')
                         ->searchable()
                         ->required(),
+                    DateTimePicker::make('published_at')
+                        ->label('Published At')
+                        ->nullable(),
                     CuratorPicker::make('featured_image_id')
                         ->relationship('featuredImage', 'id'),
                 ]),

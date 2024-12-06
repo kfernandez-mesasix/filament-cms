@@ -16,6 +16,12 @@ class Post extends Model
         return $this->belongsTo(Media::class, 'featured_image_id', 'id');
     }
 
+    /** @return BelongsTo<Author,self> */
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(Author::class, 'author_id');
+    }
+
     /** @return BelongsTo<Category,self> */
     public function category(): BelongsTo
     {
