@@ -10,7 +10,10 @@ use Filament\Tables\Table;
 use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use RalphJSmit\Filament\SEO\SEO;
+use Filament\Forms\Components\Split;
 use Illuminate\Support\Facades\Auth;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
@@ -26,11 +29,14 @@ class PostResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Blog';
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Fieldset::make('Content')
+                Section::make('Content')
+                ->columns(2)
                 ->schema([
                     TextInput::make('title')
                         ->label('Title')
@@ -53,18 +59,21 @@ class PostResource extends Resource
                     Textarea::make('excerpt')
                         ->label('Excerpt')
                         ->columnSpan('full')
-                        ->required()
                         ->maxLength(500),
                     DateTimePicker::make('published_at')
                         ->label('Published At')
                         ->nullable(),
+                    Select::make('category_id')
+                        ->relationship('category', 'name')
+                        ->searchable()
+                        ->required(),
                     CuratorPicker::make('featured_image_id')
                         ->relationship('featuredImage', 'id'),
                 ]),
-                Fieldset::make('Meta')
+                Section::make('Meta')
                 ->schema([
                     SEO::make(),
-                ]),
+                ])->grow(false),
             ]);
     }
 

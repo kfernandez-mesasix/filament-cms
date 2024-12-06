@@ -15,4 +15,10 @@ class Post extends Model
     {
         return $this->belongsTo(Media::class, 'featured_image_id', 'id');
     }
+
+    /** @return BelongsTo<Category,self> */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 }
