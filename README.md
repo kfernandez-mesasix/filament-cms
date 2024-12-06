@@ -4,24 +4,25 @@ This project is a custom Laravel-based CMS leveraging **FilamentPHP** for managi
 
 ## Features
 
--   Pages with block and layout
--   Blog Post Management (CRUD)
+-   Pages with block-based and layout builder
+-   Blog Post Management (CRUD) with categories, tags, and author
 -   User and Role Management
 -   Media Upload and Organization
 -   SEO Metadata Support
 -   Dashboard Widgets
+-   Manage settings
 -   API-ready with Laravel
 
 ---
 
 ## Plugins used
 
--   :construction: User Roles & Permissions - Shield by Bezhan Salleh - Filament
--   Media Library - Curator by Adam Weston - Filament
--   Page Builder Block-Based - Fabricator by ZedoX - Filament
--   Tags - Spatie Tags by Filament - Filament
--   :construction: Menu - Tree by Solution Forest - Filament
--   :construction: Settings - Spatie Settings by Filament - Filament
+-   :construction: User Roles & Permissions - Shield by Bezhan Salleh
+-   Media Library - Curator by Adam Weston
+-   Page Builder Block-Based - Fabricator by ZedoX
+-   Tags - Spatie Tags by Filament
+-   Settings - Spatie Settings by Filamen
+-   :construction: Menu - Tree by Solution Forest
 
 ## Installation Guide
 
