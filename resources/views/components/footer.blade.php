@@ -6,12 +6,12 @@
                 viewBox="0 0 24 24">
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
             </svg>
-            <span class="ml-3 text-xl">Tailblocks</span>
+            <span class="ml-3 text-xl">FilamentCMS</span>
         </a>
         <p class="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0">©
-            2020 Tailblocks —
-            <a href="https://twitter.com/knyttneve" class="ml-1 text-gray-600" rel="noopener noreferrer"
-                target="_blank">@knyttneve</a>
+            2024 FilamentCMS —
+            <a href="https://www.mesasix.com/" class="ml-1 text-gray-600" rel="noopener noreferrer"
+                target="_blank">Mesasix</a>
         </p>
         <span class="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start">
             <a class="text-gray-500">

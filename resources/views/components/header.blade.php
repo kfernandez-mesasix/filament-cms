@@ -31,7 +31,7 @@
                     viewBox="0 0 24 24">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                 </svg>
-                <span class="ml-3 text-xl">Tailblocks</span>
+                <span class="ml-3 text-xl">Filament CMS</span>
             </a>
             <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto">
                 <a class="mr-5 hover:text-gray-900">First Link</a>
