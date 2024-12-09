@@ -63,8 +63,7 @@ class PostResource extends Resource
                         ->maxLength(500),
                    Select::make('author_id')
                         ->relationship('author', 'name')
-                        ->searchable()
-                        ->required(),
+                        ->searchable(),
                     Select::make('category_id')
                         ->relationship('category', 'name')
                         ->searchable()
@@ -76,8 +75,14 @@ class PostResource extends Resource
                         ->nullable(),
                 ]),
                 Section::make('Image')
+                ->columns([
+                    'sm' => 3,
+                    'xl' => 6,
+                    '2xl' => 8,
+                ])
                 ->schema([
                     CuratorPicker::make('featured_image_id')
+                    ->columnSpan(2)
                     ->hiddenLabel()
                     ->relationship('featuredImage', 'id'),
                 ])->collapsible(),

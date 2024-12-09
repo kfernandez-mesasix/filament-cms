@@ -9,6 +9,7 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
         "./vendor/awcodes/filament-curator/resources/**/*.blade.php",
+        "./resources/filament-fabricator/**/*.blade.php",
     ],
     theme: {
         extend: {

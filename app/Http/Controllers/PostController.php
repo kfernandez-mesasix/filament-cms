@@ -9,7 +9,10 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::whereNotNull('published_at')->latest()->paginate(12);
+        $posts = Post::whereNotNull('published_at')
+            ->with('category')
+            ->latest()
+            ->paginate(12);
         return view('posts.index', compact('posts'));
     }
 
