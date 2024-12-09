@@ -53,8 +53,7 @@ class HeroSection extends PageBlock
                                         ->placeholder('e.g., primary, secondary')
                                         ->helperText('Define styles like "primary" or "secondary".'),
                                 ])
-                                ->createItemButtonLabel('Add Button')
-                                ->required(),
+                        ->required(),
                         ])
                         ->columnSpan(1),
 
