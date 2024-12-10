@@ -12,9 +12,11 @@ class ManageSettings extends SettingsPage
 {
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
 
-    protected static ?string $navigationGroup = 'Settings';
-
     protected static string $settings = GeneralSettings::class;
+
+    protected static ?string $title = 'Settings';
+
+    protected static ?int $navigationSort = 4;
 
     public function form(Form $form): Form
     {
