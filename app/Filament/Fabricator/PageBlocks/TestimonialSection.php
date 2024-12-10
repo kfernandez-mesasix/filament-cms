@@ -15,6 +15,8 @@ class TestimonialSection extends PageBlock
     {
         return Block::make('testimonial-section')
             ->schema([
+                TextInput::make('title')
+                ->default('Testimonials'),
                 Repeater::make('testimonials')
                 ->label('Testimonials')
                 ->schema([

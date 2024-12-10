@@ -46,12 +46,6 @@ class HeroSection extends PageBlock
                                         ->label('Button Link')
                                         ->required()
                                         ->placeholder('Enter the button link'),
-
-                                    TextInput::make('style')
-                                        ->label('Button Style')
-                                        ->default('primary')
-                                        ->placeholder('e.g., primary, secondary')
-                                        ->helperText('Define styles like "primary" or "secondary".'),
                                 ])
                         ->required(),
                         ])
