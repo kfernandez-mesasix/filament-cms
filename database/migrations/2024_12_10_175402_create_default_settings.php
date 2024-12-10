@@ -25,6 +25,8 @@ return new class extends SettingsMigration
         // Header settings
         rescue(fn () => $this->migrator->add('general.header_logo', ''));
         rescue(fn () => $this->migrator->add('general.header_menu', []));
+        rescue(fn () => $this->migrator->add('general.header_button_label', ''));
+        rescue(fn () => $this->migrator->add('general.header_button_url', ''));
 
         // Footer settings
         rescue(fn () => $this->migrator->add('general.footer_logo', ''));
@@ -58,6 +60,8 @@ return new class extends SettingsMigration
         // Header settings
         rescue(fn () => $this->migrator->delete('general.header_logo', ''));
         rescue(fn () => $this->migrator->delete('general.header_menu', []));
+        rescue(fn () => $this->migrator->delete('general.header_button_label', ''));
+        rescue(fn () => $this->migrator->delete('general.header_button_url', ''));
 
         // Footer settings
         rescue(fn () => $this->migrator->delete('general.footer_logo', ''));

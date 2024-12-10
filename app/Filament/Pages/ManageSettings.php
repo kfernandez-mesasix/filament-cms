@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Pages\SettingsPage;
 use App\Settings\GeneralSettings;
 use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
@@ -39,10 +40,10 @@ class ManageSettings extends SettingsPage
                             ->label('Site Administrator Email')
                             ->email()
                             ->required(),
-                        // FileUpload::make('site_favicon')
-                        //     ->label('Site Favicon')
-                        //     ->image()
-                        //     ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/x-icon']),
+                        FileUpload::make('site_favicon')
+                            ->label('Site Favicon')
+                            ->image()
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/x-icon']),
                     ]),
                     Forms\Components\Tabs\Tab::make('Header')
                         ->schema([
@@ -60,6 +61,15 @@ class ManageSettings extends SettingsPage
                                         ->required(),
                                 ])
                                 ->columns(2),
+                            Fieldset::make('Header Button')
+                                ->schema([
+                                    Forms\Components\TextInput::make('header_button_label')
+                                        ->label('Label')
+                                        ->required(),
+                                    Forms\Components\TextInput::make('header_button_url')
+                                        ->label('URL')
+                                        ->required()
+                                ]),
                         ]),
                     Forms\Components\Tabs\Tab::make('Footer')
                         ->schema([

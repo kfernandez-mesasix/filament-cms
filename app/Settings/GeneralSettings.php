@@ -19,6 +19,8 @@ class GeneralSettings extends Settings
 
     public ?string $header_logo;
     public ?array $header_menu;
+    public ?string $header_button_label;
+    public ?string $header_button_url;
 
     public ?string $footer_logo;
     public ?array $footer_menu;
