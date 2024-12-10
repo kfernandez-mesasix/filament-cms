@@ -12,7 +12,7 @@ class PagesWidget extends BaseWidget
 {
     use InteractsWithPageFilters;
 
-
+    protected int | string | array $columnSpan = 1;
 
     protected function getStats(): array
     {
@@ -29,5 +29,10 @@ class PagesWidget extends BaseWidget
             ),
         ];
 
+    }
+
+    protected function getColumns(): int
+    {
+        return 1;
     }
 }

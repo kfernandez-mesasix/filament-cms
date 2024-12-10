@@ -12,6 +12,7 @@ class UsersWidget extends BaseWidget
 {
     use InteractsWithPageFilters;
 
+    protected int | string | array $columnSpan = 1;
 
     protected function getStats(): array
     {
@@ -27,6 +28,11 @@ class UsersWidget extends BaseWidget
                     ->count(),
             ),
         ];
+    }
+
+    protected function getColumns(): int
+    {
+        return 1;
     }
 
     public static function canView(): bool

@@ -12,6 +12,8 @@ class PostsWidget extends BaseWidget
 {
     use InteractsWithPageFilters;
 
+    protected int | string | array $columnSpan = 1;
+
     protected function getStats(): array
     {
         $startDate = $this->filters['startDate'] ?? null;
@@ -27,5 +29,10 @@ class PostsWidget extends BaseWidget
             ),
         ];
 
+    }
+
+    protected function getColumns(): int
+    {
+        return 1;
     }
 }
