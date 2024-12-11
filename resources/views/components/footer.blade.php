@@ -2,7 +2,7 @@
     <div class="container flex flex-col items-center px-5 py-8 mx-auto sm:flex-row">
         <a href="/" class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
             @if($settings->footer_logo)
-            <img class="max-w-[180px]" src="{{ $settings->footer_logo }}"
+            <img class="max-w-[180px]" src="{{ asset($settings->footer_logo) }}"
                 alt="{{ $settings->site_name ?? config('app.name') }} footer logo">
             @else
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"

@@ -1,3 +1,11 @@
+@props([
+'title',
+'seoTitle' => '',
+'seoDescription' => '',
+'seoAuthorName' => '',
+'seoMetaTagRobots' => ''
+])
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -5,11 +13,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $settings->site_name ?? config('app.name') }}</title>
+    <title>{{ $seoTitle ?? ($settings->site_name ?? config('app.name')) }}</title>
 
-    <meta name="description" content="{{ $settings->site_description }}" />
-
-    <link rel="icon" type="image/x-icon" href="{{ $settings->site_favicon }}">
+    <meta name="description" content="{{ $seoDescription ?? $settings->site_description }}" />
+    <meta name="author" content="{{ $seoAuthorName }}">
+    <meta name="robots" content="{{ $seoMetaTagRobots ?? 'index, follow' }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset($settings->site_favicon) }}">
 
     <style>
         [x-cloak] {
@@ -34,12 +43,11 @@
     @if(!empty($settings->after_head_script))
     {!! $settings->after_head_script !!}
     @endif
-
     <header class="text-gray-600 body-font">
         <div class="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
             <a href="/" class="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0">
                 @if($settings->header_logo)
-                <img class="max-w-[180px]" src="{{ $settings->header_logo }}"
+                <img class="max-w-[180px]" src="{{ asset($settings->header_logo) }}"
                     alt="{{ $settings->site_name ?? config('app.name') }} logo">
                 @else
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"

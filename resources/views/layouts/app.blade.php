@@ -1,5 +1,5 @@
-@include('components.header')
+<x-header></x-header>
 <main>
     @yield('content')
 </main>
-@include('components.footer')
+<x-footer></x-footer>
