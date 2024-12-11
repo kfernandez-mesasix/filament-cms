@@ -5,7 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name') }}</title>
+    <title>{{ $settings->site_name ?? config('app.name') }}</title>
+
+    <meta name="description" content="{{ $settings->site_description }}" />
 
     <style>
         [x-cloak] {
@@ -25,26 +27,42 @@
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
     <header class="text-gray-600 body-font">
         <div class="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
-            <a class="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0">
+            <a href="/" class="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0">
+                @if($settings->header_logo)
+                <img class="max-w-[180px]" src="{{ $settings->header_logo }}"
+                    alt="{{ $settings->site_name ?? config('app.name') }} logo">
+                @else
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round"
                     stroke-linejoin="round" stroke-width="2" class="w-10 h-10 p-2 text-white bg-indigo-500 rounded-full"
                     viewBox="0 0 24 24">
                     <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                 </svg>
-                <span class="ml-3 text-xl">Filament CMS</span>
+                <span class="ml-3 text-xl">{{ $settings->site_name ?? config('app.name') }}</span>
+                @endif
             </a>
+            @php
+            $header_menu = is_string($settings->header_menu)
+            ? json_decode($settings->header_menu, true)
+            : $settings->header_menu;
+            @endphp
+
+            @if($header_menu && is_array($header_menu))
             <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto">
-                <a class="mr-5 hover:text-gray-900">First Link</a>
-                <a class="mr-5 hover:text-gray-900">Second Link</a>
-                <a class="mr-5 hover:text-gray-900">Third Link</a>
-                <a class="mr-5 hover:text-gray-900">Fourth Link</a>
+                @foreach($header_menu as $menu)
+                <a href="{{ $menu['url'] }}" class="mr-5 hover:text-gray-900">{{ $menu['label'] }}</a>
+                @endforeach
             </nav>
-            <button
-                class="inline-flex items-center px-3 py-1 mt-4 text-base bg-gray-100 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0">Button
+            @endif
+
+            @if($settings->header_button_url && $settings->header_button_label)
+            <a href="{{ $settings->header_button_url }}"
+                class="inline-flex items-center px-3 py-1 mt-4 text-base bg-gray-100 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0">{{
+                $settings->header_button_label }}
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     class="w-4 h-4 ml-1" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                 </svg>
-            </button>
+            </a>
+            @endif
         </div>
     </header>
