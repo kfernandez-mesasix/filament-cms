@@ -9,12 +9,18 @@
 
     <meta name="description" content="{{ $settings->site_description }}" />
 
+    <link rel="icon" type="image/x-icon" href="{{ $settings->site_favicon }}">
+
     <style>
         [x-cloak] {
             display: none !important;
         }
     </style>
 
+
+    @if(!empty($settings->header_script))
+    {!! $settings->header_script !!}
+    @endif
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -25,6 +31,10 @@
 </head>
 
 <body class="font-sans antialiased dark:bg-black dark:text-white/50">
+    @if(!empty($settings->after_head_script))
+    {!! $settings->after_head_script !!}
+    @endif
+
     <header class="text-gray-600 body-font">
         <div class="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
             <a href="/" class="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0">

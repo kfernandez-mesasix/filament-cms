@@ -49,6 +49,11 @@
 </footer>
 @filamentScripts
 @vite('resources/js/app.js')
+
+@if(!empty($settings->footer_script))
+{!! $settings->footer_script !!}
+@endif
+
 </body>
 
 </html>
