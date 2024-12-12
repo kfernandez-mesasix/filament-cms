@@ -26,7 +26,8 @@ class PagesWidget extends BaseWidget
                     ->when($startDate, fn (Builder $query) => $query->whereDate('created_at', '>=', $startDate))
                     ->when($endDate, fn (Builder $query) => $query->whereDate('created_at', '<=', $endDate))
                     ->count(),
-            ),
+            )
+            ->url('/admin/pages'),
         ];
 
     }

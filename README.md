@@ -21,8 +21,7 @@ This project is a custom Laravel-based CMS leveraging **FilamentPHP** for managi
 -   Media Library - Curator by Adam Weston
 -   Page Builder Block-Based - Fabricator by ZedoX
 -   Tags - Spatie Tags by Filament
--   Settings - Spatie Settings by Filamen
--   :construction: Menu - Tree by Solution Forest
+-   Settings - Spatie Settings by Filament
 
 ## Installation Guide
 
