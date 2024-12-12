@@ -50,6 +50,7 @@ class UserResource extends Resource
                 Select::make('roles')
                     ->label('Roles')
                     ->multiple()
+                    ->preload()
                     ->relationship('roles', 'name')
                     ->options(Role::all()->pluck('name', 'id'))
                     ->searchable(),

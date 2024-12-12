@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Policies\PagePolicy;
+use App\Policies\RolePolicy;
+use App\Policies\MediaPolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
@@ -49,9 +53,12 @@ class AppServiceProvider extends ServiceProvider
                     ])
                     ->default('index, follow'),
             ])
-
-
         ]);
+
+        Gate::policy(\Z3d0X\FilamentFabricator\Models\Page::class, PagePolicy::class);
+        Gate::policy(\Awcodes\Curator\Models\Media::class, MediaPolicy::class);
+        Gate::policy(\Spatie\Permission\Models\Role::class, RolePolicy::class);
+
         Model::unguard();
     }
 }
