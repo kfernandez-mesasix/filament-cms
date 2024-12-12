@@ -15,6 +15,8 @@ class PagesWidget extends BaseWidget
 
     protected int | string | array $columnSpan = 1;
 
+    protected ?string $heading = 'Pages Widget';
+
     protected function getStats(): array
     {
         $startDate = $this->filters['startDate'] ?? null;

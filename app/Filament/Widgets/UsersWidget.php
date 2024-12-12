@@ -14,6 +14,8 @@ class UsersWidget extends BaseWidget
 
     protected int | string | array $columnSpan = 1;
 
+    protected ?string $heading = 'Users Widget';
+
     protected function getStats(): array
     {
         $startDate = $this->filters['startDate'] ?? null;

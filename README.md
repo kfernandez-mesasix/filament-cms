@@ -17,7 +17,7 @@ This project is a custom Laravel-based CMS leveraging **FilamentPHP** for managi
 
 ## Plugins used
 
--   :construction: User Roles & Permissions - Shield by Bezhan Salleh
+-   User Roles & Permissions - Shield by Bezhan Salleh
 -   Media Library - Curator by Adam Weston
 -   Page Builder Block-Based - Fabricator by ZedoX
 -   Tags - Spatie Tags by Filament
@@ -101,13 +101,12 @@ php artisan migrate --seed
 
 ---
 
-### Step 6: Install FilamentPHP
+### Step 6: Complete Setup and Login to Admin Panel
 
-```bash
-php artisan make:filament-user
-```
+Once migrations and seeding are done, a super admin account is created. You can now log in to the admin panel using the following credentials:
 
-Follow the prompts to create an admin user.
+Email: test@example.com  
+Password: password
 
 ---
 
@@ -117,7 +116,7 @@ Step 7: Start the Development Server
 php artisan serve
 ```
 
-Access the application at http://localhost:8000.
+Access the application at [/admin](http://localhost:8000/admin).
 
 The Filament Admin Panel is available at /admin. Log in using the admin credentials you created earlier.
 

@@ -15,6 +15,8 @@ class PostsWidget extends BaseWidget
 
     protected int | string | array $columnSpan = 1;
 
+    protected ?string $heading = 'Posts Widget';
+
     protected function getStats(): array
     {
         $startDate = $this->filters['startDate'] ?? null;
