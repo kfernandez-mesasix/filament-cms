@@ -133,29 +133,4 @@ class PostResource extends Resource
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
     }
-
-    public static function canViewAny(): bool
-    {
-        return Auth::user()?->can('manage posts') ?? false;
-    }
-
-    public static function canCreate(): bool
-    {
-        return Auth::user()?->can('manage posts') ?? false;
-    }
-
-    public static function canEdit($record): bool
-    {
-        return Auth::user()?->can('manage posts') ?? false;
-    }
-
-    public static function canDelete($record): bool
-    {
-        return Auth::user()?->can('manage posts') ?? false;
-    }
-
-    public static function shouldRegisterNavigation(): bool
-    {
-        return Auth::user()?->can('manage posts') ?? false;
-    }
 }

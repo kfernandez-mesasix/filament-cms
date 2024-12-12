@@ -17,11 +17,6 @@ class DatabaseSeeder extends Seeder
         // Clear images
         Storage::deleteDirectory('public');
 
-        // User role creation
-        $this->call([
-            RoleAndPermissionSeeder::class,
-        ]);
-
         // Admin Creation
         $this->command->warn(PHP_EOL . 'Creating admin user...');
         User::factory()->create([

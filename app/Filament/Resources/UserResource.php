@@ -9,17 +9,11 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
-use Spatie\Permission\Models\Permission;
 use Filament\Tables\Actions\DeleteAction;
-use Illuminate\Database\Eloquent\Builder;
-use Filament\Forms\Components\CheckboxList;
 use App\Filament\Resources\UserResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\UserResource\RelationManagers;
 
 class UserResource extends Resource
 {
@@ -27,7 +21,9 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 0;
+
+    protected static ?string $navigationGroup = 'User Management';
 
     public static function form(Form $form): Form
     {
@@ -57,12 +53,6 @@ class UserResource extends Resource
                     ->relationship('roles', 'name')
                     ->options(Role::all()->pluck('name', 'id'))
                     ->searchable(),
-
-                CheckboxList::make('permissions')
-                    ->label('Permissions')
-                    ->relationship('permissions', 'name')
-                    ->columns(2)
-                    ->options(Permission::all()->pluck('name', 'id')),
             ]);
     }
 
@@ -102,30 +92,5 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }
-
-    public static function canViewAny(): bool
-    {
-        return Auth::user()?->can('manage users') ?? false;
-    }
-
-    public static function canCreate(): bool
-    {
-        return Auth::user()?->can('manage users') ?? false;
-    }
-
-    public static function canEdit($user): bool
-    {
-        return Auth::user()?->can('manage users') ?? false;
-    }
-
-    public static function canDelete($user): bool
-    {
-        return Auth::user()?->can('manage users') ?? false;
-    }
-
-    public static function shouldRegisterNavigation(): bool
-    {
-        return Auth::user()?->can('manage users') ?? false;
     }
 }
