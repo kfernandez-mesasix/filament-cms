@@ -60,7 +60,8 @@ class PostResource extends Resource
                     Textarea::make('excerpt')
                         ->label('Excerpt')
                         ->columnSpan('full')
-                        ->maxLength(500),
+                        ->maxLength(500)
+                        ->required(),
                    Select::make('author_id')
                         ->relationship('author', 'name')
                         ->searchable(),
