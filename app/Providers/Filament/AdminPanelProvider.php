@@ -66,6 +66,9 @@ class AdminPanelProvider extends PanelProvider
                     ->registerNavigation(true)
                     ->defaultListView('grid' || 'list'),
                 FilamentFabricatorPlugin::make(),
+            ])
+            ->resources([
+                config('filament-logger.activity_resource')
             ]);
     }
 }
