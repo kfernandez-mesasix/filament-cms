@@ -8,7 +8,7 @@ use App\Models\Author;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
-use App\Filament\Resources\AuthorResource\Pages\ManageAuthors;
+use App\Filament\Resources\AuthorResource\Pages;
 
 class AuthorResource extends Resource
 {
@@ -86,7 +86,7 @@ class AuthorResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ManageAuthors::route('/'),
+            'index' => Pages\ManageAuthor::route('/'),
         ];
     }
 }

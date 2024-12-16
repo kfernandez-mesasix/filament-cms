@@ -12,8 +12,10 @@ use Spatie\Permission\Models\Role;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Support\Facades\Password;
 use Filament\Tables\Actions\DeleteAction;
 use App\Filament\Resources\UserResource\Pages;
+use App\Notifications\UserInvitationNotification;
 
 class UserResource extends Resource
 {
@@ -39,13 +41,9 @@ class UserResource extends Resource
                     ->email(),
 
                 TextInput::make('password')
-                    ->label('Password')
-                    ->password()
-                    ->required(fn($context) => $context === 'create')
-                    ->minLength(8)
-                    ->maxLength(255)
-                    ->dehydrateStateUsing(fn($state) => $state ? bcrypt($state) : null)
-                    ->hiddenOn('edit'),
+                ->label('Password')
+                ->password()
+                ->hidden(),
 
                 Select::make('roles')
                     ->label('Roles')
@@ -93,5 +91,33 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    public static function mutateFormDataBeforeCreate(array $data): array
+    {
+        // Create the user instance
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+        ]);
+
+        // Assign roles
+        if (isset($data['roles'])) {
+            $user->assignRole($data['roles']);
+        }
+
+        // Generate a password reset token
+        $token = Password::createToken($user);
+
+        // Generate the password reset URL
+        $setPasswordUrl = url(route('filament.admin.auth.password-reset.request', [
+            'token' => $token,
+            'email' => $user->email,
+        ]));
+
+        // Notify the user
+        $user->notify(new UserInvitationNotification($setPasswordUrl));
+
+        return $data;
     }
 }

@@ -4,14 +4,14 @@ This project is a custom Laravel-based CMS leveraging **FilamentPHP** for managi
 
 ## Features
 
--   Pages with block-based and layout builder
--   Blog Post Management (CRUD) with categories, tags, and author
--   User and Role Management
--   Media Upload and Organization
--   SEO Metadata Support
--   Dashboard Widgets
--   Manage settings
--   API-ready with Laravel
+-   Block-based Page Builder: Create and customize pages with ease using a modular drag-and-drop interface.
+-   Blog Management: Full CRUD support for blog posts, complete with categories, tags, and author assignments.
+-   User & Role Management: Role-based access control to ensure secure and efficient user operations.
+-   Media Library: Upload, organize, and manage media files effortlessly.
+-   SEO Metadata Support: Optimize pages and posts for search engines directly from the admin panel.
+-   Dashboard Widgets: Provide quick insights and actionable data for admins.
+-   Settings Management: Centralized control of application-wide settings.
+-   API-ready: Extensible via RESTful APIs for seamless integration with other platforms.
 
 ---
 
@@ -110,7 +110,7 @@ Password: password
 
 ---
 
-Step 7: Start the Development Server
+### Step 7: Start the Development Server
 
 ```bash
 php artisan serve

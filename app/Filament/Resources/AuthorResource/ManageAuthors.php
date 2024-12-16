@@ -6,7 +6,7 @@ use App\Filament\Resources\AuthorResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
 
-class ManageAuthors extends ManageRecords
+class ManageAuthor extends ManageRecords
 {
     protected static string $resource = AuthorResource::class;
 
