@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\URL;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -91,33 +92,5 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }
-
-    public static function mutateFormDataBeforeCreate(array $data): array
-    {
-        // Create the user instance
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-        ]);
-
-        // Assign roles
-        if (isset($data['roles'])) {
-            $user->assignRole($data['roles']);
-        }
-
-        // Generate a password reset token
-        $token = Password::createToken($user);
-
-        // Generate the password reset URL
-        $setPasswordUrl = url(route('filament.admin.auth.password-reset.request', [
-            'token' => $token,
-            'email' => $user->email,
-        ]));
-
-        // Notify the user
-        $user->notify(new UserInvitationNotification($setPasswordUrl));
-
-        return $data;
     }
 }
