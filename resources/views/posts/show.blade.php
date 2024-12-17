@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
+@section('header')
+<x-header :seo="$post->seo" />
+@endsection
+
 @section('content')
+
 <article class="text-gray-600 body-font">
     <div class="container px-5 py-16 mx-auto">
         <div class="flex justify-between gap-2">

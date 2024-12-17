@@ -10,11 +10,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    @if ($seo)
     <title>{{ $seo->title ?? ($settings->site_name ?? config('app.name')) }}</title>
-
     <meta name="description" content="{{ $seo->description ?? $settings->site_description }}" />
     <meta name="author" content="{{ $seo->author ?? '' }}">
     <meta name="robots" content="{{ $seo->robots ?? 'index, follow' }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    @endif
+
     <link rel="icon" type="image/x-icon" href="{{ asset($settings->site_favicon) }}">
 
     <style>

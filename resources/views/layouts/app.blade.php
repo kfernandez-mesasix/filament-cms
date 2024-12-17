@@ -1,4 +1,4 @@
-<x-header></x-header>
+@yield('header')
 <main>
     @yield('content')
 </main>
