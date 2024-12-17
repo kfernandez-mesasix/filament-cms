@@ -67,7 +67,9 @@
             @if($header_menu && is_array($header_menu))
             <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto">
                 @foreach($header_menu as $menu)
-                <a href="{{ $menu['url'] }}" class="mr-5 hover:text-gray-900">{{ $menu['label'] }}</a>
+                <a href="{{ $menu['url'] }}" class="mr-5 hover:text-gray-900 {{ (request()->is(ltrim($menu['url'], '/')) ||
+                   (ltrim($menu['url'], '/') == '' && request()->is('/')))  ? 'text-indigo-600' : '' }}">{{
+                    $menu['label'] }}</a>
                 @endforeach
             </nav>
             @endif
