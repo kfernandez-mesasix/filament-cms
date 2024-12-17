@@ -13,7 +13,7 @@
     <title>{{ $seo->title ?? ($settings->site_name ?? config('app.name')) }}</title>
 
     <meta name="description" content="{{ $seo->description ?? $settings->site_description }}" />
-    <meta name="author" content="{{ $seo->author }}">
+    <meta name="author" content="{{ $seo->author ?? '' }}">
     <meta name="robots" content="{{ $seo->robots ?? 'index, follow' }}">
     <link rel="icon" type="image/x-icon" href="{{ asset($settings->site_favicon) }}">
 

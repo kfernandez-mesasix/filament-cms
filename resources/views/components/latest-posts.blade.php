@@ -1,6 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
 <section class="text-gray-600 body-font">
     <div class="container px-5 py-16 mx-auto">
         <h1 class="mb-8 text-4xl font-bold text-center">Blog Posts</h1>
@@ -41,4 +38,3 @@
         </div>
     </div>
 </section>
-@endsection
