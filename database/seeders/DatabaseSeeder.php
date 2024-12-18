@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
@@ -18,28 +16,23 @@ class DatabaseSeeder extends Seeder
         // Clear images
         Storage::deleteDirectory('public');
 
+        $this->call([
+            ShieldSeeder::class
+        ]);
+
         // Create Admin User
-        $this->command->warn(PHP_EOL . 'Creating admin user...');
+        $this->command->warn(PHP_EOL . 'Creating super admin user...');
         $adminUser = User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-        $this->command->info('Admin user created.');
+        $this->command->info('Super Admin user created.');
 
-        // Create Super Admin Role
-        $this->command->warn(PHP_EOL . 'Creating super_admin role...');
-        $superAdminRole = Role::create(['name' => 'super_admin']);
-        $this->command->info('Super_admin role created.');
-
-        // Assign All Permissions to Super Admin
-        $this->command->warn(PHP_EOL . 'Assigning all permissions to super_admin role...');
-        $permissions = Permission::all();
-        $superAdminRole->syncPermissions($permissions);
-        $this->command->info('All permissions assigned to super_admin role.');
 
         // Assign Role to Admin User
+        $superAdminRole = 'super_admin';
         $this->command->warn(PHP_EOL . 'Assigning super_admin role to test@example.com...');
         $adminUser->assignRole($superAdminRole);
-        $this->command->info('Super_admin role assigned to test@example.com.');
+        $this->command->info('super_admin role assigned to test@example.com.');
     }
 }
