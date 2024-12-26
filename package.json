@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "prepare": "husky install"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.9",
@@ -12,7 +13,9 @@
         "axios": "^1.7.4",
         "concurrently": "^9.0.1",
         "cropperjs": "^1.6.2",
+        "husky": "^8.0.0",
         "laravel-vite-plugin": "^1.0",
+        "lint-staged": "^15.2.11",
         "postcss": "^8.4.49",
         "postcss-nesting": "^13.0.1",
         "tailwindcss": "^3.4.15",
